@@ -4,155 +4,125 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <array>
 #include <limits>
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
 
 
-int option1() {
-	std::cout << "You chose option 1 \n";
-	return 0;
+// ----------- Option functions -----------
+void option1() {
+
 }
-int option2() {
-	std::cout << "You chose option 2 \n";
-	return 0;
-}
-int option3() {
-	std::cout << "You chose option 3 \n";
-	return 0;
-}
-int option4() {
-	std::cout << "You chose option 4 \n";
-	return 0;
-}
-int option5() {
-	std::cout << "You chose option 5 \n";
-	return 0;
-}
-int option6() {
-	std::cout << "You chose option 6 \n";
-	return 0;
-}
-int option7() {
-	std::cout << "You chose option 7 \n";
-	return 0;
+void option2() {
+    std::cout << "\n[Random Number Guessing Game]\n";
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    int randomNum = std::rand() % 101;
+    int guess = -1;
+
+    while (true) {
+        std::cout << "Guess the number (0-100): ";
+        std::cin >> guess;
+        if (guess == randomNum) {
+            std::cout << "Correct! The number was " << randomNum << ".\n";
+            break;
+        }
+        if (guess < randomNum)
+            std::cout << "Too low!\n";
+        else
+            std::cout << "Too high!\n";
+    }
 }
 
+void option3() {
+    std::cout << "\n[FizzBuzz]\n";
+    for (int i = 1; i <= 20; ++i) {
+        if (i % 15 == 0) std::cout << "FizzBuzz\n";
+        else if (i % 3 == 0) std::cout << "Fizz\n";
+        else if (i % 5 == 0) std::cout << "Buzz\n";
+        else std::cout << i << "\n";
+    }
+}
+
+void option4() {
+    std::cout << "\n[Debugging]\nThis section can be used for testing.\n";
+}
+
+void option5() {
+    std::cout << "\n[Temperature Converter]\n";
+    double temp, result;
+    int choice;
+	bool again = true; // C is Celsius, F is Fahrenheit, K is Kelvin
+    while (again) {
+        std::cout << "1) C → F\n2) F → C\n3) C → K\n4) K → C\n5) F → K\n6) K → F\n7) Back\n";
+        std::cin >> choice;
+        if (choice == 7) break;
+
+        std::cout << "Enter temperature: ";
+        std::cin >> temp;
+        switch (choice) {
+        case 1: result = (temp * 9 / 5) + 32; std::cout << result << " °F\n"; break;
+        case 2: result = (temp - 32) * 5 / 9; std::cout << result << " °C\n"; break;
+        case 3: result = temp + 273.15; std::cout << result << " K\n"; break;
+        case 4: result = temp - 273.15; std::cout << result << " °C\n"; break;
+        case 5: result = (temp - 32) * 5 / 9 + 273.15; std::cout << result << " K\n"; break;
+        case 6: result = (temp - 273.15) * 9 / 5 + 32; std::cout << result << " °F\n"; break;
+        default: std::cout << "Invalid choice.\n";
+			// If it's below 5°C || 41°F || 278K, print "It's cold AF!"
+			// if it's below 0°C || 32°F || 273K, print "It's freezing!"
+			// if it's below -20°C || -4°F || 253K, print "Classic Swedish Winter"
+			// if it's below -40°C || -40°F || 233K, print "It's Antarctica out here!"
+			// if it's below -100°C || -148°F || 173K, print "Are we out in space?"
+			// if it's between -273.15°C and -40°C || -459.67°F and -40°F || 0K and 233K, print "Hell has froozen over"
+			// if it's at -273.15°C || -459.67°F || 0K, print "This is absolute zero!"
+			// if it's between 0°C and 20°C || 32°F and 68°F || 273K and 293K, print "It's a bit chilly."
+			// If it's above 20°C || 68°F || 293K, print "Nice weather we're having today :)"
+			// if it's above 30°C || 86°F || 303K, print "It's hot as balls!"
+			// if it's above 100°C || 212°F || 373K, print "It's boiling!"
+        }
+        std::cout << "Another conversion? (1=yes 0=no): ";
+        std::cin >> again;
+    }
+}
 
 
-int main()
-{
-	std::cout << "Hello! I'm FizzBuzz-ArrayLoop \n";
-	int i = 1;
-	int playing = 1;
-	while (playing == 1) {
-		std::cout << "[1] Prime Number Checker" << std::endl;
-		std::cout << "[2] Random Number Guessing Game" << std::endl;
-		std::cout << "[3] FizzBuzz" << std::endl;
-		std::cout << "[4] Debugging" << std::endl;
-		std::cout << "[5] Temperaure" << std::endl;
-		std::cout << "[6] Array" << std::endl;
-		std::cout << "[7] Exit" << std::endl;
-		int choice;
+void option6() { //Databehandling 
+  //  int number = std:: 101;
+}
 
-		std::cin >> choice;
+void option7() {
+    std::cout << "\nGoodbye!\n";
+}
 
-		switch (choice) {
-		case 1:option1();
-			//Prime Number Checker
-			using namespace std;
-			/*variable definition and initialization*/
-			int n, i, c = 0;
+// ----------- Main program -----------
+int main() {
+    std::cout << "Hello! I'm FizzBuzz-ArrayLoop.\n";
+    bool playing = true;
+    while (playing) {
+        std::cout << "\nMenu:\n"
+            << "1) Prime Number Checker\n"
+            << "2) Random Number Guessing Game\n"
+            << "3) FizzBuzz\n"
+            << "4) Debugging\n"
+            << "5) Temperature\n"
+            << "6) --Data-- TBD\n"
+            << "7) Exit\n"
+            << "Enter choice: ";
 
-			/*Get us input*/
-			cout << "Enter any number n: "; cin >> n;
-			/*Logik*/
-		break;
-		case 2:option2();
-			//Random Number Guessing Game 
-
-			std::cout << "Welcome to the number guessing game! \n";
-			std::cout << "Guess the random number from 0 to 100 \n";
-			int prime = 0;
-			srand(static_cast<unsigned int>(time(0)));
-			int randomNum = rand() % 101;
-			std::cout << randomNum;
-
-			int guess = 0;
-			while (randomNum != guess) {
-				std::cout << "Guess the number! ";
-				std::cin >> guess;
-				std::cout << "You guessed: " << guess << std::endl;
-				if (guess == randomNum) {
-					std::cout << "You guessed the correct number, Congrats!" << std::endl;
-					//Replayability here
-					std::cout << "Do you want to play again? y/n" << std::endl;
-					std::string playAgain;
-					std::cin >> playAgain;
-					break;
-					if (guess == prime) {
-						std::cout << "Did you know this number is a prime number?" << std::endl;
-					}
-				}
-				else {
-					std::cout << "Try again!" << std::endl;
-					std::cout << "Hint? y/n" << std::endl;
-					std::string hint;
-					std::cin >> hint;
-
-					if (hint == "y" || hint == "yes") {
-						if (guess < randomNum) {
-							std::cout << "Number is too low, Try Agin!" << std::endl;
-						}
-						else if (guess > randomNum)
-							std::cout << "Number is too high, Try Agin!" << std::endl;
-					}
-
-					else if (hint == "n" || hint == "no") {
-
-
-					}
-				}
-			} // <-- Added this closing brace for the while loop
-			break; // <-- Added this break for case 2
-		case 3:option3();
-			//FizzBuzz
-			break;
-		case 4:option4();
-			//Debugging
-			break;
-		case 5:option5();
-			//Temperaure
-			break;
-		case 6:option6();
-			//Array
-
-				//Uppgift 1: Array
-				/*int arr[5] = { 1, 5, 8, 15, 21 };*/
-
-					//-primtal check- if randomNum is prime, tell user "Did you know this number is a prime number"
-			/*return 0; */
-			break;
-			//Exit
-
-		case 7: {
-			option7();
-			std::cout << "Goodbye! \n";
-			return 0;
-		}
-		default: {
-			std::cout << "Invalid choice.\n";
-			break;
-
-
-
-			}
-
-
-		}
-	}
+        int choice;
+        std::cin >> choice;
+        switch (choice) {
+        case 1: option1(); break;
+        case 2: option2(); break;
+        case 3: option3(); break;
+        case 4: option4(); break;
+        case 5: option5(); break;
+        case 6: option6(); break;
+        case 7: option7(); playing = false; break;
+        default: std::cout << "Invalid choice.\n"; break;
+        }
+    }
+    return 0;
 }
 /*int data[] = {1, 5, 8, 15, 21};
 int sum = 0;
