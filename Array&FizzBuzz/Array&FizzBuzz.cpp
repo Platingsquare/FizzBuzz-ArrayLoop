@@ -118,6 +118,7 @@ int main()
 			} // <-- Added this closing brace for the while loop
 			break; // <-- Added this break for case 2
 		case 3:option3();
+		
 			//FizzBuzz
 			break;
 		case 4:option4();
