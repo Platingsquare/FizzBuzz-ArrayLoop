@@ -12,8 +12,9 @@
 #include <sstream>
 using namespace std;
 
+//Graph 
 
-void PrintBarGraph(const std::vector<double>& values) {
+void printbarGraph(const std::vector<double>& values) {
     if (values.empty()) return;
     double maxVal = *max_element(values.begin(), values.end());
     cout << "\nBar Graph:\n";
@@ -59,7 +60,7 @@ void Prime() { //Prime Number Checker
    
 }
 
-void RNG() {
+void guessingGame() {
     bool again = true; // Play again loop
     while (again) {
         cout << "\n[Random Number Guessing Game]\n";
@@ -84,7 +85,7 @@ void RNG() {
     }
 }
 // Done Uppgift 2: FizzBuzz
-void FizzBuzz() {
+void fizzBuzz() {
     // Function for option 3: FizzBuzz
     cout << "\n[FizzBuzz]\n";
     for (int i = 1; i <= 100; ++i) {
@@ -99,7 +100,7 @@ void Debugging() {
     cout << "\n[Debugging]\nThis section can be used for testing.\n";
 }
 // Done Uppgift 3: Temperature Converter
-void Temperature() {
+void temperatureConverter() {
     cout << "\n[Temperature Converter]\n";
     double temp, result;
     int choice;
@@ -127,18 +128,40 @@ void Temperature() {
     }
 }
 
+int findValue(vector<double>& values, int value) { 
+    int index = -1;     // -1 means we haven't found a value
+
+    for (int i = 0; i < values.size(); i++) {
+        int currentValue = static_cast<int>(values[i]);
+        if (currentValue == value) {
+            index = i;
+            break;
+        }
+            
+    }
+
+
+    return index;
+}
+
+
 // Done Uppgift 1: Data - Measurments & Analysis
-void Calculations() {
+void dataAnalysis() {
+
     cout << "\n[Data - Measurments & Analysis]\n";
     bool running = true;
+    vector<double> values;
     while (running) {
-        cout << "\n[Data - Measurements & Analysis]\n";
-        cout << "Choose an option:\n";
-        cout << "1) Basic Algebra (mean, variance, etc.)\n";
-        cout << "2) Graph\n";
-        cout << "3) Back to Main Menu\n";
-        cout << "Enter choice: ";
+        //Printing Menu
+        cout << "\n[Data - Measurements & Analysis]\n"
+         << "Choose an option:\n"
+         << "1) Basic Algebra (mean, variance, etc.)\n"
+         << "2) Graph\n"
+         << "3) Find Value\n"
+         << "4) Back to Main Menu\n"
+         << "Enter choice: ";
 
+        //Accepting Input
         int choice;
         if (!(cin >> choice)) {
             cout << "Invalid input. Please enter a number.\n";
@@ -151,7 +174,6 @@ void Calculations() {
 
         if (choice == 1) {
             // --- Existing statistics code ---
-            vector<double> values;
             string input;
             cout << "Enter the numbers you wish to measure/analyze (write 'done' to stop inputting numbers):\n";
             
@@ -230,9 +252,17 @@ void Calculations() {
                 cout << "Nothing was entered\n";
                 continue;
             }
-            PrintBarGraph(values);
+            printbarGraph(values);
         }
         else if (choice == 3) {
+            cout << "Enter A Value to Find: ";
+            int entry = -1;
+            cin >> entry;
+            int result = findValue(values, entry); 
+            cout << "Found Value at: " << result << "\n"; 
+            cin >> entry;
+        }
+        else if (choice == 4) {
             running = false;
         }
         else {
@@ -263,7 +293,7 @@ void Array() { //Array
 }
 
 // Done: LED Simulation
-void LED() { // LED Simulation
+void toggleLED() { // LED Simulation
     cout << "\n[LED Simulation]\n";
 
     bool ledState = false; // false = OFF, true = ON
@@ -299,7 +329,7 @@ void LED() { // LED Simulation
 }
 
 
-void Exit() { //Exit
+void exitProgram() { //Exit
     cout << "\nGoodbye!\n";
 }
 
@@ -328,14 +358,14 @@ int main() {
 
         switch (choice) {
         case 1: Prime(); break;
-        case 2: RNG(); break;
-        case 3: FizzBuzz(); break;
+        case 2: guessingGame(); break;
+        case 3: fizzBuzz(); break;
         case 4: Debugging(); break;
-        case 5: Temperature(); break;
-        case 6: Calculations(); break;
+        case 5: temperatureConverter(); break;
+        case 6: dataAnalysis(); break;
         case 7: Array(); break;
-		case 8: LED(); break;
-        case 9: Exit(); playing = false; break;
+		case 8: toggleLED(); break;
+        case 9: exitProgram(); playing = false; break;
         default: cout << "Invalid choice.\n"; break;
         }
     }
