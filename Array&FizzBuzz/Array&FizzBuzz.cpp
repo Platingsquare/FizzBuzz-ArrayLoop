@@ -12,37 +12,58 @@
 #include <sstream>
 using namespace std;
 
-// ----------- Option functions -----------
+
+void PrintBarGraph(const std::vector<double>& values) {
+    if (values.empty()) return;
+    double maxVal = *max_element(values.begin(), values.end());
+    cout << "\nBar Graph:\n";
+    for (size_t i = 0; i < values.size(); ++i) {
+        cout << "Value #" << i + 1 << " (" << values[i] << "): ";
+        int barLength = static_cast<int>((values[i] / maxVal) * 50); // scale to max 50 chars
+        for (int j = 0; j < barLength; ++j) cout << '#';
+        cout << "\n";
+    }
+}
+
+// ----------- Functions -----------
 void Prime() { //Prime Number Checker
-    bool again = true;// 
+    bool again = true;
     while (again) {
         cout << "\n[Prime Number Checker]\n";
         cout << "This is the Prime Number Checker!\n";
         cout << "Write any number and I will tell you if it's a prime number\n";
-        std::cin >> n;
+        int n;
+        while (!(cin >> n)) {
+            cout << "Invalid input. Please enter a valid integer: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
         bool isPrime = true;
         if (n <= 1) isPrime = false;
-
-        if (isPrime)
-            std::cout << n << " is a prime number.\n";
-        else
-            std::cout << n << " is not a prime number.\n";
-    }
-        vector<string>
-            loadfunfacts(const string & funfacts); {
-
+        else {
+            for (int i = 2; i <= sqrt(n); ++i) {
+                if (n % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
         }
+        if (isPrime)
+            cout << n << " is a prime number.\n";
+        else
+            cout << n << " is not a prime number.\n";
+        cout << "Check another number? (1=yes 0=no): ";
         cin >> again;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-    cout << "Do you want to check another number? (1=yes 0=no):\n";
-    cin >> again;
+   
 }
 
 void RNG() {
     bool again = true; // Play again loop
     while (again) {
         cout << "\n[Random Number Guessing Game]\n";
-        srand(static_cast<unsigned int>(time(nullptr))); // seed för random
+        srand(static_cast<unsigned int>(time(nullptr))); // seed for random number generator
         int randomNum = rand() % 101;
         int guess = -1;
 
@@ -74,7 +95,7 @@ void FizzBuzz() {
     }
 }
 
-void option4() {
+void Debugging() {
     cout << "\n[Debugging]\nThis section can be used for testing.\n";
 }
 // Done Uppgift 3: Temperature Converter
@@ -107,14 +128,14 @@ void Temperature() {
 }
 
 // Done Uppgift 1: Data - Measurments & Analysis
-void option6() {
+void Calculations() {
     cout << "\n[Data - Measurments & Analysis]\n";
     bool running = true;
     while (running) {
         cout << "\n[Data - Measurements & Analysis]\n";
         cout << "Choose an option:\n";
-        cout << "1) Basic Statistics (mean, variance, etc.)\n";
-        cout << "2) Pythagoras Theorem\n";
+        cout << "1) Basic Algebra (mean, variance, etc.)\n";
+        cout << "2) Graph\n";
         cout << "3) Back to Main Menu\n";
         cout << "Enter choice: ";
 
@@ -133,7 +154,7 @@ void option6() {
             vector<double> values;
             string input;
             cout << "Enter the numbers you wish to measure/analyze (write 'done' to stop inputting numbers):\n";
-
+            
             while (true) {
                 cout << "Number #" << values.size() + 1 << ": ";
                 getline(cin >> ws, input); // ws = whitespace
@@ -155,106 +176,92 @@ void option6() {
                 continue;
             }
 
-    // --- Calculations ---
-    double sum = 0;
-    double minVal = values[0];
-    double maxVal = values[0];
+            // --- Calculations ---
+            double sum = 0;
+            double minVal = values[0];
+            double maxVal = values[0];
 
-    for (double v : values) {
-        sum += v;
-        if (v < minVal) minVal = v;
-        if (v > maxVal) maxVal = v;
-    }
+            for (double v : values) {
+                sum += v;
+                if (v < minVal) minVal = v;
+                if (v > maxVal) maxVal = v;
+            }
 
-    double mean = sum / values.size();
-    double variance = 0;
+            double mean = sum / values.size();
+            double variance = 0;
 
-    for (double v : values) {
-        variance += pow(v - mean, 2);
-    }
-    variance /= values.size();
-    double stddev = sqrt(variance);
+            for (double v : values) {
+                variance += pow(v - mean, 2);
+            }
+            variance /= values.size();
+            double stddev = sqrt(variance);
 
-    // --- Output ---
-    cout << fixed;
-    cout.precision(3);
-    cout << "\n=== Resultat ===\n";
-    cout << "Antal värden: " << values.size() << "\n";
-    cout << "Summa: " << sum << "\n";
-    cout << "Medelvärde: " << mean << "\n";
-    cout << "Min-värde: " << minVal << "\n";
-    cout << "Max-värde: " << maxVal << "\n";
-    cout << "Varians: " << variance << "\n";
-    cout << "Standardavvikelse: " << stddev << "\n";
+            // --- Output ---
+            cout << fixed;
+            cout.precision(3);
+            cout << "\n=== Resultat ===\n";
+            cout << "Antal värden: " << values.size() << "\n";
+            cout << "Summa: " << sum << "\n";
+            cout << "Medelvärde: " << mean << "\n";
+            cout << "Min-värde: " << minVal << "\n";
+            cout << "Max-värde: " << maxVal << "\n";
+            cout << "Varians: " << variance << "\n";
+            cout << "Standardavvikelse: " << stddev << "\n";
 
-}
+        }
         else if (choice == 2) {
-            // --- Pythagoras Theorem ---
-            cout << "\n[Pythagoras Theorem]\n";
-            cout << "Choose what to calculate:\n";
-            cout << "1) Hypotenuse (given sides a and b)\n";
-            cout << "2) Side a (given hypotenuse c and side b)\n";
-            cout << "3) Side b (given hypotenuse c and side a)\n";
-            cout << "Enter choice: ";
-
-            int pChoice;
-            if (!(cin >> pChoice)) {
-                cout << "Invalid input.\n";
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            vector<double> values;
+            string input;
+            cout << "Enter the numbers to graph (write 'done' to stop inputting numbers):\n";
+            while (true) {
+                cout << "Number #" << values.size() + 1 << ": ";
+                getline(cin >> ws, input);
+                if (input == "done" || input == "Done") break;
+                stringstream ss(input);
+                double value;
+                if (ss >> value && ss.eof()) {
+                    values.push_back(value);
+                }
+                else {
+                    cout << "Invalid input! Please input a new number\n";
+                }
+            }
+            if (values.empty()) {
+                cout << "Nothing was entered\n";
                 continue;
             }
-
-            double a, b, c;
-
-            switch (pChoice) {
-            case 1:
-                cout << "Enter side a: ";
-                cin >> a;
-                cout << "Enter side b: ";
-                cin >> b;
-                c = sqrt(pow(a, 2) + pow(b, 2));
-                cout << "Hypotenuse (c) = " << c << "\n";
-                break;
-
-            case 2:
-                cout << "Enter hypotenuse c: ";
-                cin >> c;
-                cout << "Enter side b: ";
-                cin >> b;
-                if (c <= b) { cout << "Error: c must be greater than b.\n"; break; }
-                a = sqrt(pow(c, 2) - pow(b, 2));
-                cout << "Side a = " << a << "\n";
-                break;
-
-            case 3:
-                cout << "Enter hypotenuse c: ";
-                cin >> c;
-                cout << "Enter side a: ";
-                cin >> a;
-                if (c <= a) { cout << "Error: c must be greater than a.\n"; break; }
-                b = sqrt(pow(c, 2) - pow(a, 2));
-                cout << "Side b = " << b << "\n";
-                break;
-
-            default:
-                cout << "Invalid choice.\n";
-            }
+            PrintBarGraph(values);
         }
-
         else if (choice == 3) {
             running = false;
-            cout << "Returning to main menu...\n";
         }
-
         else {
             cout << "Invalid choice.\n";
         }
     }
 }
-void option7() { //Array
-    cout << "\n";
+
+
+void Array() { //Array
+    cout << "\n[Array Swaper]\n";
+    void Array(); {
+        cout << "\n[Array Swap Example]\n";
+        int arr[5] = { 1, 2, 3, 4, 5 };
+        cout << "Original array: ";
+        for (int i = 0; i < 5; ++i) cout << arr[i] << " ";
+        cout << endl;
+
+        // Swap first and last element
+        int temp = arr[0];
+        arr[0] = arr[4];
+        arr[4] = temp;
+
+        cout << "After swap (first and last): ";
+        for (int i = 0; i < 5; ++i) cout << arr[i] << " ";
+        cout << endl;
+    }
 }
+
 // Done: LED Simulation
 void LED() { // LED Simulation
     cout << "\n[LED Simulation]\n";
@@ -276,7 +283,7 @@ void LED() { // LED Simulation
        
         case 1:
             ledState = !ledState;
-            cout << "LED toggled " << (ledState ? "ON " : "OFF ") << "\n";
+            cout << "Toggle LED " << (ledState ? "ON " : "OFF ") << "\n";
             break;
         case 2:
             cout << "LED is currently " << (ledState ? "ON " : "OFF ") << "\n";
@@ -317,16 +324,16 @@ int main() {
 
         int choice;
         cin >> choice;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // rensa bufferten
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
 
         switch (choice) {
         case 1: Prime(); break;
         case 2: RNG(); break;
         case 3: FizzBuzz(); break;
-        case 4: option4(); break;
+        case 4: Debugging(); break;
         case 5: Temperature(); break;
-        case 6: option6(); break;
-        case 7: option7(); break;
+        case 6: Calculations(); break;
+        case 7: Array(); break;
 		case 8: LED(); break;
         case 9: Exit(); playing = false; break;
         default: cout << "Invalid choice.\n"; break;
@@ -342,17 +349,8 @@ cout << "Before swap: x=" << x << ", y=" << y << std::endl;
 swap(&x,&y); 
 cout << "After swap: x=" << x << ", y=" << y << std::endl; 
 void setLedState(bool* led, bool state) {
-    if (led) { 
-        led = state;
-        bool led = false; 
-        setLedState(&led, true);
-        cout << "LED state:" << (led ? "On" : "Off");
+  
+        I need to eventually make seperate files to make it more readable and seperate the different things
         Add Calculator for next time 
-        Maybe try going for chess? making a chess bot? Q-Queen,K-King,B-Bishop,Kn-Knight,R-Rook,P-Pawn. int for how Q,K,B,Kn,R and P can move on a 8x8 board 
-        E-engaging, A-application, R-resource, L-loader - Hello my name is Earl
         Make it not crash when letters are entered instead of numbers
-		Add hint for option 2
-		Add fun facts for option 1
-        Make new names to replace the option names to make it more obvious for the code reader
-        
         */
