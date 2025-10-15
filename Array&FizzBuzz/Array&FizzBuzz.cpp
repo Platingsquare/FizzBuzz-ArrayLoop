@@ -1,6 +1,6 @@
 ﻿// Array&FizzBuzz.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
+#include <algorithm>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -255,12 +255,13 @@ void dataAnalysis() {
             printbarGraph(values);
         }
         else if (choice == 3) {
-            cout << "Enter A Value to Find: ";
+            cout << "Enter A Value to Find (0-100): ";
             int entry = -1;
             cin >> entry;
             int result = findValue(values, entry); 
-            cout << "Found Value at: " << result << "\n"; 
-            cin >> entry;
+            cout << "Found Value at: " << result << "\nEnter done to go back"; 
+            string done;
+            cin >> done;
         }
         else if (choice == 4) {
             running = false;
