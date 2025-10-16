@@ -1,4 +1,18 @@
-# Array&FizzBuzz
-Menu for different tasks, including but not limited to Temperature calculations, Number guessing game, prime number calculations, A school assignment for numbers 0-100 and reversed ( don't know how I want to incorporate it yet and FizzBuzz a thing that essentially tells me if it is divisible by 3,5 or 15 for Fizz, Buzz or FizzBuzz.
+# FizzBuzz-ArrayLoop
+This is a C++ application for calculating, analyzing, and visualizing measurement data (e.g., temperatures). Also, almost the entire program is run inside a loop, so be careful if editing. I will try and update it to have them in separate files. 
+ 
 
-I'm writing this after having posted FizzBuzz-ArrayLoop mk2. Idk if mk1 is now still visible. I am going to keep updating it for the school assignment but also try and include as many things I can that I think would be fun features. So far I haven't been able to get the debugging working. I'm still missing a median value calculator and wondering if I should just add that somehow to the future plan of the prime number calculator project. I also want to add a prime number identifier to my random number generator, where it will tell you it is a random number guessed or generated. I want to make for nr 6 Data processing assignment all in one, where it can calculate all the numbers put in and calculate a median from it.
+Menu:
+1.	Prime Number Checker
+2.	Random Number Guessing Game
+3.	FizzBuzz
+4.	Debugging
+5.	Temperature Converter
+6.	Data - Measurments & Analysis
+7.	Number Swaper (Work in Progress)
+8.	LED Simulation
+9.	Exit
+
+ How to Use: Run Program and follow instructions of data entry
+ 
+  I was thinking I could call it EARL: Efficient, Assistant, Report, Log || Mostly so I can tell it "My name is Earl" like the show.
