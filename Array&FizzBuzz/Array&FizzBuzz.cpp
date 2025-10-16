@@ -259,7 +259,11 @@ void dataAnalysis() {
             int entry = -1;
             cin >> entry;
             int result = findValue(values, entry); 
-            cout << "Found Value at: " << result << "\nEnter done to go back"; 
+            if (result == -1)
+                cout << "Value not found.\n";
+            else
+                cout << "Found value at index: " << result << "\n";
+            cout << "Enter done to go back: ";
             string done;
             cin >> done;
         }
@@ -348,7 +352,7 @@ int main() {
             << "4) Debugging\n"
             << "5) Temperature Converter\n"
             << "6) Data - Measurments & Analysis\n"
-            << "7) Array - TBD\n"
+            << "7) Number Swaper (Work in Progress)\n"
 			<< "8) LED Simulation\n"
             << "9) Exit\n"
             << "Enter choice: ";
